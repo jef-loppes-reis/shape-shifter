@@ -1,4 +1,4 @@
-from os import path
+from os import path, mkdir
 
 from PIL import Image, ImageDraw, UnidentifiedImageError
 
@@ -62,7 +62,7 @@ class ShapeShifterImg:
             )
 
 
-    def check_size_img(self, codpro:str='000000') -> dict:
+    def check_size_img(self, codpro:str='000000', size_limit:int=500) -> dict:
         """_summary_
 
         Args:
@@ -74,18 +74,40 @@ class ShapeShifterImg:
         try:
             img_pil = Image.open(self.path_img)
             tam_img = img_pil.size
-            if tam_img[0] < 500 or tam_img[1] < 500:
+            if tam_img[0] < size_limit or tam_img[1] < size_limit:
                 img = self.tratar(img_tratar=img_pil)
                 draw = ImageDraw.Draw(img)
                 self._draw_corner(empate=draw, image=img)
-                img.save(f'./out/photos_resize_1200x1200/{self.name_photo}')
-                return {'codpro': codpro, 'name_photo': self.name_photo,
-                        'resize': True, 'foto_corrompida': False}
-            return {'codpro': codpro, 'name_photo': self.name_photo,
-                    'resize': False, 'foto_corrompida': False, 'foto_size_limit': False}
+                if not path.exists('./out/photos_resize_1200x1200'):
+                    mkdir('./out')
+                    mkdir('./out/photos_resize_1200x1200')
+                img.save(f'out/photos_resize_1200x1200/{self.name_photo}')
+                return {
+                    'codpro': codpro,
+                    'name_photo': self.name_photo,
+                    'resize': True,
+                    'foto_corrompida': False
+                }
+            return {
+                'codpro': codpro,
+                'name_photo': self.name_photo,
+                'resize': False,
+                'foto_corrompida': False,
+                'foto_size_limit': False
+            }
         except UnidentifiedImageError:
-            return {'codpro': codpro, 'name_photo': self.name_photo,
-                    'resize': False, 'foto_corrompida': True, 'foto_size_limit': False}
+            return {
+                'codpro': codpro,
+                'name_photo': self.name_photo,
+                'resize': False,
+                'foto_corrompida': True,
+                'foto_size_limit': False
+            }
         except Exception:
-            return {'codpro': codpro, 'name_photo': self.name_photo,
-                    'resize': False, 'foto_corrompida': False, 'foto_size_limit': True}
+            return {
+                'codpro': codpro,
+                'name_photo': self.name_photo,
+                'resize': False,
+                'foto_corrompida': False,
+                'foto_size_limit': True
+            }
