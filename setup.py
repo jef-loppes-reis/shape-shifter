@@ -13,4 +13,4 @@ setup(name='shape-shifter-img',
     keywords='shape shifter img',
     description=u'ShapeShifterImg nao oficializado',
     packages=['shape-shifter'],
-    install_requires=['pillow'])
+    install_requires=[])
