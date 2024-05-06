@@ -1,0 +1,28 @@
+[build-system]
+
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+
+name = "shape-shifter-img"
+
+authors = [
+  { name="Jeferson Lopes", email="jefersondip25@gmail.com" },
+]
+
+description = "Ferramentas de desenvolvimento da equipe de E-commerce da Pecista."
+
+keywords = ["shape-shifter-img", "shape-shifter", "resize-img"]
+
+requires-python = ">=3.10"
+
+dependencies = [
+    "pillow",
+]
+
+dynamic = ["version"]
+
+[tool.setuptools]
+zip-safe = false
