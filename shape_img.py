@@ -23,7 +23,7 @@ class ShapeShifterImg:
         #     raise RuntimeError("Erro, a foto nao existe!") from e
 
 
-    def _draw_corner(self, empate:ImageDraw.ImageDraw, image:Image.Image, margin:int=5):
+    def _draw_corner(self, empate:ImageDraw.ImageDraw, image:Image.Image, margin:int=5) -> None:
         """_summary_
 
         Args:
@@ -43,7 +43,8 @@ class ShapeShifterImg:
         for shape in shapes:
             empate.line(shape, fill=self.colors['black'], width=1)
 
-    def tratar(self, img_tratar: Image) -> None:
+
+    def tratar(self, img_tratar: Image, size_min:int=1200) -> None:
         """_summary_
 
         Args:
@@ -54,7 +55,7 @@ class ShapeShifterImg:
 
         new_image = Image.new('RGB', (img_tratar.size[0]//5, img_tratar.size[1]//6), background_color)
         img_tratar.paste(im=new_image, box=(img_tratar.size[0] - new_image.size[0], 0))
-        min_size = 1200 / min(img_tratar.size)
+        min_size = size_min / min(img_tratar.size)
         return img_tratar.resize(
             (int(img_tratar.size[0] * min_size),
             int(img_tratar.size[1] * min_size)),
@@ -67,6 +68,7 @@ class ShapeShifterImg:
 
         Args:
             codpro (str, optional): _description_. Defaults to '000000'.
+            size_limit (int, optional): _description_. Defaults to 500.
 
         Returns:
             dict: _description_
