@@ -12,5 +12,5 @@ setup(name='shape-shifter-img',
     author_email='jeferson.projectspy@gmail.com',
     keywords='shape shifter img',
     description=u'ShapeShifterImg nao oficializado',
-    packages=['shape-shifter-img'],
+    packages=['shape-shifter'],
     install_requires=['pillow'])
