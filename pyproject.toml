@@ -1,5 +1,5 @@
 [project]
-name = 'shape_img'
+name = 'shape-shifter'
 requires-python = '>=3.10'
 dependencies = [
   'pillow'
